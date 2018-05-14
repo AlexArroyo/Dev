@@ -20,20 +20,24 @@ namespace VotingApp.Api.Controllers
         public object Get() => _voting.GetState();
 
         [HttpPost]
-        public object Post([FromBody]string value)
+        public object Post([FromBody]string[] values)
         {
-            _voting.Vote(value);
+            _voting.Start(values);
             return _voting.GetState();
         }
 
         [HttpPut]
         public object Put([FromBody]string value)
         {
+            _voting.Vote(value);
+            return _voting.GetState();
         }
 
         [HttpDelete]
         public object Delete()
         {
+            _voting.Finish();
+            return _voting.GetState();
         }
     }
 }

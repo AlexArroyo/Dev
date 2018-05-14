@@ -25,6 +25,12 @@ namespace VotingApp.Domain
             var maxVotes = Votes.Max(x => x.Value);
             Winner = Votes.First(x => x.Value == maxVotes).Key;
         }
+
+        public object GetState() => new
+        {
+            Votes,
+            Winner
+        };
     }
 
 }
